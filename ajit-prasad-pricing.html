@@ -1,0 +1,520 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Ajit Prasad — Services & Pricing</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet" />
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg: #ffffff;
+    --bg-secondary: #f5f5f3;
+    --bg-tertiary: #eeede9;
+    --text-primary: #1a1a18;
+    --text-secondary: #5c5c58;
+    --text-tertiary: #999992;
+    --border: rgba(0,0,0,0.1);
+    --border-md: rgba(0,0,0,0.18);
+    --radius-md: 8px;
+    --radius-lg: 12px;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #1a1a18;
+      --bg-secondary: #242422;
+      --bg-tertiary: #2c2c2a;
+      --text-primary: #f0efe9;
+      --text-secondary: #a0a09a;
+      --text-tertiary: #686864;
+      --border: rgba(255,255,255,0.1);
+      --border-md: rgba(255,255,255,0.18);
+    }
+  }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--bg-secondary);
+    color: var(--text-primary);
+    min-height: 100vh;
+    padding: 2rem 1rem;
+  }
+
+  .container {
+    max-width: 760px;
+    margin: 0 auto;
+  }
+
+  .hero {
+    margin-bottom: 2rem;
+  }
+
+  .hero-name {
+    font-size: 26px;
+    font-weight: 500;
+    color: var(--text-primary);
+  }
+
+  .hero-sub {
+    font-size: 14px;
+    color: var(--text-secondary);
+    margin-top: 5px;
+  }
+
+  .links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 14px;
+  }
+
+  .link-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 6px 13px;
+    border-radius: 99px;
+    border: 0.5px solid var(--border-md);
+    font-size: 12px;
+    color: var(--text-secondary);
+    text-decoration: none;
+    background: var(--bg);
+    transition: background 0.15s;
+  }
+
+  .link-pill:hover { background: var(--bg-tertiary); }
+
+  .link-icon { width: 14px; height: 14px; flex-shrink: 0; }
+
+  .filters {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 7px;
+    margin-bottom: 1.75rem;
+  }
+
+  .filter-btn {
+    padding: 5px 13px;
+    border-radius: 99px;
+    border: 0.5px solid var(--border);
+    font-size: 12px;
+    font-family: 'DM Sans', sans-serif;
+    color: var(--text-secondary);
+    background: var(--bg);
+    cursor: pointer;
+    transition: all 0.15s;
+    white-space: nowrap;
+  }
+
+  .filter-btn:hover { background: var(--bg-secondary); }
+
+  .filter-btn.active {
+    background: var(--bg);
+    border-color: var(--border-md);
+    color: var(--text-primary);
+    font-weight: 500;
+  }
+
+  .section { margin-bottom: 2rem; }
+
+  .section-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 10px;
+    padding-bottom: 10px;
+    border-bottom: 0.5px solid var(--border);
+  }
+
+  .section-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+
+  .section-title {
+    font-size: 11px;
+    font-weight: 500;
+    color: var(--text-secondary);
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+  }
+
+  .section-count {
+    margin-left: auto;
+    font-size: 11px;
+    color: var(--text-tertiary);
+  }
+
+  .services-grid { display: grid; gap: 2px; }
+
+  .service-row {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 9px 12px;
+    border-radius: var(--radius-md);
+    background: var(--bg);
+    border: 0.5px solid transparent;
+    transition: border-color 0.15s, background 0.15s;
+  }
+
+  .service-row:hover {
+    border-color: var(--border);
+    background: var(--bg-tertiary);
+  }
+
+  .service-num {
+    font-size: 11px;
+    font-family: 'DM Mono', monospace;
+    color: var(--text-tertiary);
+    min-width: 18px;
+    text-align: right;
+  }
+
+  .service-name { font-size: 14px; color: var(--text-primary); flex: 1; }
+
+  .service-price {
+    font-size: 13px;
+    font-weight: 500;
+    font-family: 'DM Mono', monospace;
+    color: var(--text-primary);
+    white-space: nowrap;
+  }
+
+  .package-card {
+    border: 0.5px solid var(--border);
+    border-radius: var(--radius-lg);
+    padding: 1rem 1.25rem;
+    background: var(--bg);
+    margin-bottom: 8px;
+  }
+
+  .package-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 10px;
+    gap: 12px;
+  }
+
+  .package-name { font-size: 15px; font-weight: 500; color: var(--text-primary); }
+
+  .package-price {
+    font-size: 16px;
+    font-weight: 500;
+    font-family: 'DM Mono', monospace;
+    color: var(--text-primary);
+    white-space: nowrap;
+  }
+
+  .package-items { display: flex; flex-wrap: wrap; gap: 6px; }
+
+  .package-tag {
+    font-size: 11px;
+    padding: 3px 9px;
+    border-radius: 99px;
+    background: var(--bg-secondary);
+    color: var(--text-secondary);
+    border: 0.5px solid var(--border);
+  }
+
+  .note-box {
+    border: 0.5px solid var(--border);
+    border-radius: var(--radius-md);
+    padding: 1rem 1.25rem;
+    background: var(--bg);
+    margin-top: 2rem;
+  }
+
+  .note-text {
+    font-size: 13px;
+    color: var(--text-secondary);
+    line-height: 1.65;
+  }
+
+  .note-text + .note-text { margin-top: 8px; }
+
+  .hidden { display: none !important; }
+
+  .dot-blue   { background: #378ADD; }
+  .dot-teal   { background: #1D9E75; }
+  .dot-coral  { background: #D85A30; }
+  .dot-pink   { background: #D4537E; }
+  .dot-purple { background: #7F77DD; }
+  .dot-amber  { background: #BA7517; }
+  .dot-red    { background: #E24B4A; }
+  .dot-green  { background: #639922; }
+  .dot-gray   { background: #888780; }
+</style>
+</head>
+<body>
+<div class="container">
+
+  <div class="hero">
+    <div class="hero-name">Ajit Prasad</div>
+    <div class="hero-sub">Design & Creative Services · Pricing Guide</div>
+    <div class="links">
+      <a class="link-pill" href="https://ajit-prasad-portfolio.vercel.app/" target="_blank">
+        <svg class="link-icon" viewBox="0 0 16 16" fill="none"><rect x="2" y="2" width="12" height="12" rx="2" stroke="currentColor" stroke-width="1.2"/><path d="M5 8h6M8 5l3 3-3 3" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        Portfolio
+      </a>
+      <a class="link-pill" href="https://www.linkedin.com/in/ajit-prasad-/" target="_blank">
+        <svg class="link-icon" viewBox="0 0 16 16" fill="currentColor"><path d="M3.5 2A1.5 1.5 0 1 0 3.5 5 1.5 1.5 0 0 0 3.5 2zM2 6h3v8H2V6zm5 0h2.8v1.1h.04C10.26 6.4 11.3 6 12.5 6 14.8 6 15 7.5 15 9.4V14h-3v-4c0-1-.02-2.3-1.4-2.3S9 8.8 9 9.9V14H6V6z"/></svg>
+        LinkedIn
+      </a>
+      <a class="link-pill" href="mailto:ajitprasad.tech@gmail.com">
+        <svg class="link-icon" viewBox="0 0 16 16" fill="none"><path d="M2 4h12v8H2V4z" stroke="currentColor" stroke-width="1.2" stroke-linejoin="round"/><path d="M2 4l6 5 6-5" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        ajitprasad.tech@gmail.com
+      </a>
+    </div>
+  </div>
+
+  <div class="filters">
+    <button class="filter-btn active" data-cat="all">All categories</button>
+    <button class="filter-btn" data-cat="brand">Brand Strategy</button>
+    <button class="filter-btn" data-cat="print">Print & Marketing</button>
+    <button class="filter-btn" data-cat="social">Social & Digital</button>
+    <button class="filter-btn" data-cat="photo">Photo Editing</button>
+    <button class="filter-btn" data-cat="illustration">Illustration & Docs</button>
+    <button class="filter-btn" data-cat="uiux">UI/UX & Web</button>
+    <button class="filter-btn" data-cat="video">Video Editing</button>
+    <button class="filter-btn" data-cat="audio">Audio & Post</button>
+    <button class="filter-btn" data-cat="packages">Packages</button>
+  </div>
+
+  <div id="sections">
+
+    <div class="section" data-cat="brand">
+      <div class="section-header">
+        <span class="section-dot dot-blue"></span>
+        <span class="section-title">Brand Strategy & Identity</span>
+        <span class="section-count">7 services</span>
+      </div>
+      <div class="services-grid">
+        <div class="service-row"><span class="service-num">1</span><span class="service-name">Logo & Brand Mark Design</span><span class="service-price">$90</span></div>
+        <div class="service-row"><span class="service-num">2</span><span class="service-name">Brand Identity Design</span><span class="service-price">$600</span></div>
+        <div class="service-row"><span class="service-num">3</span><span class="service-name">Brand Character / Mascot Design</span><span class="service-price">$180</span></div>
+        <div class="service-row"><span class="service-num">4</span><span class="service-name">Event Branding Design</span><span class="service-price">$150</span></div>
+        <div class="service-row"><span class="service-num">5</span><span class="service-name">3D Logo Mockup</span><span class="service-price">$50</span></div>
+        <div class="service-row"><span class="service-num">6</span><span class="service-name">Social Media Identity Kit (profile pic, banner, highlights)</span><span class="service-price">$120</span></div>
+        <div class="service-row"><span class="service-num">7</span><span class="service-name">Brand Style Guidelines</span><span class="service-price">$220</span></div>
+      </div>
+    </div>
+
+    <div class="section" data-cat="print">
+      <div class="section-header">
+        <span class="section-dot dot-teal"></span>
+        <span class="section-title">Print & Marketing</span>
+        <span class="section-count">7 services</span>
+      </div>
+      <div class="services-grid">
+        <div class="service-row"><span class="service-num">1</span><span class="service-name">Marketing Collateral Design (Flyers, Posters, Banners)</span><span class="service-price">$35</span></div>
+        <div class="service-row"><span class="service-num">2</span><span class="service-name">Brochure & Print Design</span><span class="service-price">$25 / page</span></div>
+        <div class="service-row"><span class="service-num">3</span><span class="service-name">Business Card Design</span><span class="service-price">$40</span></div>
+        <div class="service-row"><span class="service-num">4</span><span class="service-name">Packaging & Label Design</span><span class="service-price">$250</span></div>
+        <div class="service-row"><span class="service-num">5</span><span class="service-name">Merchandise Design</span><span class="service-price">$35</span></div>
+        <div class="service-row"><span class="service-num">6</span><span class="service-name">Menu & Catalog Design</span><span class="service-price">$25 / page</span></div>
+        <div class="service-row"><span class="service-num">7</span><span class="service-name">Book & Cover Design</span><span class="service-price">$80</span></div>
+      </div>
+    </div>
+
+    <div class="section" data-cat="social">
+      <div class="section-header">
+        <span class="section-dot dot-coral"></span>
+        <span class="section-title">Social Media & Digital Ads</span>
+        <span class="section-count">7 services</span>
+      </div>
+      <div class="services-grid">
+        <div class="service-row"><span class="service-num">1</span><span class="service-name">Social Media Content Design</span><span class="service-price">$20</span></div>
+        <div class="service-row"><span class="service-num">2</span><span class="service-name">Paid Ad Creatives (Meta, Google, etc.)</span><span class="service-price">$50</span></div>
+        <div class="service-row"><span class="service-num">3</span><span class="service-name">Campaign Creative Packages</span><span class="service-price">$150</span></div>
+        <div class="service-row"><span class="service-num">4</span><span class="service-name">YouTube Thumbnail Design</span><span class="service-price">$15</span></div>
+        <div class="service-row"><span class="service-num">5</span><span class="service-name">Email Template Design</span><span class="service-price">$60</span></div>
+        <div class="service-row"><span class="service-num">6</span><span class="service-name">Infographics & Data Visualization</span><span class="service-price">$70</span></div>
+        <div class="service-row"><span class="service-num">7</span><span class="service-name">Web & Digital Banner Design</span><span class="service-price">$30</span></div>
+      </div>
+    </div>
+
+    <div class="section" data-cat="photo">
+      <div class="section-header">
+        <span class="section-dot dot-pink"></span>
+        <span class="section-title">Photo Editing & Retouching</span>
+        <span class="section-count">9 services</span>
+      </div>
+      <div class="services-grid">
+        <div class="service-row"><span class="service-num">1</span><span class="service-name">Product Image Optimization</span><span class="service-price">$12</span></div>
+        <div class="service-row"><span class="service-num">2</span><span class="service-name">Professional Retouching</span><span class="service-price">$25</span></div>
+        <div class="service-row"><span class="service-num">3</span><span class="service-name">Portrait Enhancement</span><span class="service-price">$25</span></div>
+        <div class="service-row"><span class="service-num">4</span><span class="service-name">Color Grading & Correction</span><span class="service-price">$30</span></div>
+        <div class="service-row"><span class="service-num">5</span><span class="service-name">AI Photo Upscaling</span><span class="service-price">$6</span></div>
+        <div class="service-row"><span class="service-num">6</span><span class="service-name">AI Background Removal & Compositing</span><span class="service-price">$10</span></div>
+        <div class="service-row"><span class="service-num">7</span><span class="service-name">AI-Generated Product Visuals</span><span class="service-price">$15</span></div>
+        <div class="service-row"><span class="service-num">8</span><span class="service-name">Advanced Image Manipulation</span><span class="service-price">$50</span></div>
+        <div class="service-row"><span class="service-num">9</span><span class="service-name">Photo Restoration</span><span class="service-price">$90</span></div>
+      </div>
+    </div>
+
+    <div class="section" data-cat="illustration">
+      <div class="section-header">
+        <span class="section-dot dot-purple"></span>
+        <span class="section-title">Documents, Illustration & Digital Art</span>
+        <span class="section-count">8 services</span>
+      </div>
+      <div class="services-grid">
+        <div class="service-row"><span class="service-num">1</span><span class="service-name">Vector Illustrations</span><span class="service-price">$70</span></div>
+        <div class="service-row"><span class="service-num">2</span><span class="service-name">Digital Artwork</span><span class="service-price">$150</span></div>
+        <div class="service-row"><span class="service-num">3</span><span class="service-name">Digital Painting & Concept Art</span><span class="service-price">$180</span></div>
+        <div class="service-row"><span class="service-num">4</span><span class="service-name">Product & Brand Mockup Design</span><span class="service-price">$60</span></div>
+        <div class="service-row"><span class="service-num">5</span><span class="service-name">ATS-Optimized Resume Design</span><span class="service-price">$70</span></div>
+        <div class="service-row"><span class="service-num">6</span><span class="service-name">Professional Document & PDF Design</span><span class="service-price">$25 / page</span></div>
+        <div class="service-row"><span class="service-num">7</span><span class="service-name">Presentation & Pitch Deck Design</span><span class="service-price">$300</span></div>
+        <div class="service-row"><span class="service-num">8</span><span class="service-name">Animated Presentation Design</span><span class="service-price">$500</span></div>
+      </div>
+    </div>
+
+    <div class="section" data-cat="uiux">
+      <div class="section-header">
+        <span class="section-dot dot-amber"></span>
+        <span class="section-title">UI/UX & Web Design</span>
+        <span class="section-count">4 services</span>
+      </div>
+      <div class="services-grid">
+        <div class="service-row"><span class="service-num">1</span><span class="service-name">Website UI/UX Design</span><span class="service-price">$1,200</span></div>
+        <div class="service-row"><span class="service-num">2</span><span class="service-name">Mobile Application Design</span><span class="service-price">$1,500</span></div>
+        <div class="service-row"><span class="service-num">3</span><span class="service-name">No-Code / Low-Code Development</span><span class="service-price">$500</span></div>
+        <div class="service-row"><span class="service-num">4</span><span class="service-name">Design Systems & UI Assets</span><span class="service-price">$700</span></div>
+      </div>
+    </div>
+
+    <div class="section" data-cat="video">
+      <div class="section-header">
+        <span class="section-dot dot-red"></span>
+        <span class="section-title">Video Editing</span>
+        <span class="section-count">14 services</span>
+      </div>
+      <div class="services-grid">
+        <div class="service-row"><span class="service-num">1</span><span class="service-name">Commercial & Ad Video Editing</span><span class="service-price">$250</span></div>
+        <div class="service-row"><span class="service-num">2</span><span class="service-name">Social Media Video Content</span><span class="service-price">$100</span></div>
+        <div class="service-row"><span class="service-num">3</span><span class="service-name">YouTube Video Production</span><span class="service-price">$150</span></div>
+        <div class="service-row"><span class="service-num">4</span><span class="service-name">Product & Promo Videos</span><span class="service-price">$120</span></div>
+        <div class="service-row"><span class="service-num">5</span><span class="service-name">Podcast & Interview Editing</span><span class="service-price">$180</span></div>
+        <div class="service-row"><span class="service-num">6</span><span class="service-name">Course & Webinar Editing</span><span class="service-price">$250</span></div>
+        <div class="service-row"><span class="service-num">7</span><span class="service-name">Event Highlight Videos</span><span class="service-price">$150</span></div>
+        <div class="service-row"><span class="service-num">8</span><span class="service-name">App Promo Videos</span><span class="service-price">$120</span></div>
+        <div class="service-row"><span class="service-num">9</span><span class="service-name">Multi-Platform Edits</span><span class="service-price">$80</span></div>
+        <div class="service-row"><span class="service-num">10</span><span class="service-name">Music Video Editing</span><span class="service-price">$180</span></div>
+        <div class="service-row"><span class="service-num">11</span><span class="service-name">AI Video Generation</span><span class="service-price">$80</span></div>
+        <div class="service-row"><span class="service-num">12</span><span class="service-name">Motion Graphics Video</span><span class="service-price">$300</span></div>
+        <div class="service-row"><span class="service-num">13</span><span class="service-name">Professional Color Grading</span><span class="service-price">$120</span></div>
+        <div class="service-row"><span class="service-num">14</span><span class="service-name">Video Enhancement (AI Upscaling, Stabilization)</span><span class="service-price">$80</span></div>
+      </div>
+    </div>
+
+    <div class="section" data-cat="audio">
+      <div class="section-header">
+        <span class="section-dot dot-green"></span>
+        <span class="section-title">Audio & Post Production</span>
+        <span class="section-count">6 services</span>
+      </div>
+      <div class="services-grid">
+        <div class="service-row"><span class="service-num">1</span><span class="service-name">Audio Enhancement</span><span class="service-price">$60</span></div>
+        <div class="service-row"><span class="service-num">2</span><span class="service-name">Podcast Vocal Edit</span><span class="service-price">$70</span></div>
+        <div class="service-row"><span class="service-num">3</span><span class="service-name">Voiceover Integration</span><span class="service-price">$70</span></div>
+        <div class="service-row"><span class="service-num">4</span><span class="service-name">Multi-Cam Editing</span><span class="service-price">$150</span></div>
+        <div class="service-row"><span class="service-num">5</span><span class="service-name">Subtitles & Captions</span><span class="service-price">$20</span></div>
+        <div class="service-row"><span class="service-num">6</span><span class="service-name">Multilingual Subtitles</span><span class="service-price">$30</span></div>
+      </div>
+    </div>
+
+    <div class="section" data-cat="packages">
+      <div class="section-header">
+        <span class="section-dot dot-gray"></span>
+        <span class="section-title">Design Packages</span>
+        <span class="section-count">4 bundles</span>
+      </div>
+      <div class="package-card">
+        <div class="package-header">
+          <div class="package-name">Startup Launch Package</div>
+          <div class="package-price">$900</div>
+        </div>
+        <div class="package-items">
+          <span class="package-tag">Logo & Brand Mark</span>
+          <span class="package-tag">Brand Identity (colors, typography)</span>
+          <span class="package-tag">Social Media Identity Kit</span>
+          <span class="package-tag">Business Card Design</span>
+          <span class="package-tag">Basic Brand Guidelines</span>
+        </div>
+      </div>
+      <div class="package-card">
+        <div class="package-header">
+          <div class="package-name">Social Media Business Growth Package</div>
+          <div class="package-price">$500</div>
+        </div>
+        <div class="package-items">
+          <span class="package-tag">5–10 Posts & Story</span>
+          <span class="package-tag">Ad Creatives</span>
+          <span class="package-tag">Banner Design</span>
+          <span class="package-tag">Campaign Planning</span>
+          <span class="package-tag">Marketing Collateral</span>
+        </div>
+      </div>
+      <div class="package-card">
+        <div class="package-header">
+          <div class="package-name">Digital Product Launch Package</div>
+          <div class="package-price">$1,500</div>
+        </div>
+        <div class="package-items">
+          <span class="package-tag">UI/UX Design</span>
+          <span class="package-tag">Website Design</span>
+          <span class="package-tag">Application Design</span>
+          <span class="package-tag">Design System & UI Assets</span>
+        </div>
+      </div>
+      <div class="package-card">
+        <div class="package-header">
+          <div class="package-name">Product Launch Kit</div>
+          <div class="package-price">$1,200</div>
+        </div>
+        <div class="package-items">
+          <span class="package-tag">Packaging Design</span>
+          <span class="package-tag">Product Mockups</span>
+          <span class="package-tag">5–10 Ad Creatives</span>
+          <span class="package-tag">Product Promo Video</span>
+          <span class="package-tag">Social Media Posts</span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="note-box">
+    <p class="note-text">Pricing is provided as an estimate and may vary depending on the scope and complexity of the project. Please share your design brief for an exact quote.</p>
+    <p class="note-text">Pricing is based on long-term collaboration and high project volume. Faster or template-based work (like Canva designs) may cost less, while complex custom projects are priced higher.</p>
+  </div>
+
+</div>
+
+<script>
+  const filters = document.querySelectorAll('.filter-btn');
+  const sections = document.querySelectorAll('.section[data-cat]');
+  filters.forEach(btn => {
+    btn.addEventListener('click', () => {
+      filters.forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      const cat = btn.dataset.cat;
+      sections.forEach(sec => {
+        if (cat === 'all' || sec.dataset.cat === cat) {
+          sec.classList.remove('hidden');
+        } else {
+          sec.classList.add('hidden');
+        }
+      });
+    });
+  });
+</script>
+</body>
+</html>
